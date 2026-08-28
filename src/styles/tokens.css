@@ -23,11 +23,18 @@
   --color-shadow: oklch(25% 0.025 155 / 0.13);
   --color-tablet: oklch(38% 0.02 155);
   --color-footer-rule: oklch(80% 0.066 145 / 0.25);
+  --color-cream-translucent: oklch(97.5% 0.012 90 / 0.88);
+  --color-surface-translucent: oklch(100% 0 0 / 0.72);
+  --color-surface-rule: oklch(87% 0.018 145 / 0.72);
   --color-accent: var(--color-forest);
   --color-accent-ink: var(--color-surface);
 
   --font-display: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
   --text-display: clamp(2.35rem, 4.7vw, 4.75rem);
   --text-h1: clamp(2.15rem, 4vw, 4.25rem);
   --text-h2: clamp(1.8rem, 2.8vw, 3rem);

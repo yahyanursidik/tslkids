@@ -26,11 +26,11 @@ const finderData = programs.map((program) => ({ title: program.data.title, slug:
     <button class="button button--primary finder-submit" type="submit">Tampilkan rekomendasi <ArrowRight size={17} aria-hidden="true" /></button>
     <p id="finder-error" class="form-status" data-state="error" hidden role="alert">Pilih usia dan kebutuhan utama terlebih dahulu.</p>
   </form>
-  <div class="finder-result" id="finder-result" hidden aria-live="polite">
+  <div class="finder-result" id="finder-result" aria-live="polite">
     <p class="eyebrow">Rekomendasi awal</p>
-    <h3 id="finder-result-title"></h3>
-    <p id="finder-result-copy"></p>
-    <a id="finder-result-link" href="#">Pelajari program <ArrowRight size={16} aria-hidden="true" /></a>
+    <h3 id="finder-result-title">Qur'an Private Anak</h3>
+    <p id="finder-result-copy">Pendampingan satu guru untuk satu anak dapat menjadi titik mulai saat kebutuhan belajarnya lebih personal.</p>
+    <a id="finder-result-link" href="/program/quran-private/">Pelajari program <ArrowRight size={16} aria-hidden="true" /></a>
   </div>
 </section>
 <script define:vars={{ finderData }}>
@@ -40,12 +40,12 @@ const finderData = programs.map((program) => ({ title: program.data.title, slug:
   const title = document.querySelector('#finder-result-title');
   const copy = document.querySelector('#finder-result-copy');
   const link = document.querySelector('#finder-result-link');
-  finder?.addEventListener('submit', (event) => {
-    event.preventDefault();
+  const updateRecommendation = (event) => {
+    event?.preventDefault();
     const values = new FormData(finder);
     const age = String(values.get('age') || '');
     const need = String(values.get('need') || '');
-    if (!age || !need) { error.hidden = false; result.hidden = true; return; }
+    if (!age || !need) { error.hidden = false; return; }
     error.hidden = true;
     let selection = finderData[1];
     let reason = 'Pendampingan personal dapat membantu pembelajaran mengikuti kebutuhan dan ritme Ananda.';
@@ -55,7 +55,11 @@ const finderData = programs.map((program) => ({ title: program.data.title, slug:
     title.textContent = selection.title;
     copy.textContent = reason;
     link.href = `/program/${selection.slug}/`;
-    result.hidden = false;
-    result.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+    if (event?.type === 'submit') result.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+  };
+  finder?.addEventListener('submit', updateRecommendation);
+  finder?.addEventListener('change', () => {
+    const values = new FormData(finder);
+    if (values.get('age') && values.get('need')) updateRecommendation();
   });
 </script>
