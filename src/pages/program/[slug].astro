@@ -1,0 +1,13 @@
+---
+import { getCollection, render } from 'astro:content';
+import { ArrowRight, Check } from 'lucide-astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+export async function getStaticPaths() { const programs = await getCollection('programs'); return programs.map((program) => ({ params: { slug: program.data.slug }, props: { program } })); }
+const { program } = Astro.props;
+const { Content } = await render(program);
+---
+<BaseLayout title={`${program.data.title} | TSL Kids`} description={program.data.summary}>
+  <section class="page-hero"><div class="container content-grid"><div><p class="eyebrow">Program usia {program.data.ageMin}–{program.data.ageMax} tahun</p><h1>{program.data.title}</h1><p class="lede">{program.data.summary}</p><a class="button button--primary" href="/daftar/">Daftar Program <ArrowRight size={17} aria-hidden="true" /></a></div><aside class="content-panel"><ul class="detail-facts"><li><strong>Format</strong><span>{program.data.format}</span></li><li><strong>Mode</strong><span>Online</span></li>{program.data.duration && <li><strong>Durasi</strong><span>{program.data.duration}</span></li>}{program.data.frequency && <li><strong>Pilihan frekuensi</strong><span>{program.data.frequency.join(', ')}</span></li>}</ul></aside></div></section>
+  <section class="section section--warm"><div class="container content-grid"><article class="content-panel"><h2>Untuk siapa program ini?</h2><p>{program.data.suitableFor}</p><Content /></article><aside class="content-panel"><h2>Fokus pembelajaran</h2><ul>{program.data.focus.map((item) => <li>{item}</li>)}</ul></aside></div></section>
+  <section class="section"><div class="container content-grid"><article><p class="eyebrow">Kemitraan belajar</p><h2>Peran orang tua</h2><p class="lede">{program.data.parentRole}</p></article><aside class="content-panel"><h3>Langkah berikutnya</h3><p>Isi formulir minat untuk memulai percakapan tentang kebutuhan belajar Ananda.</p><a class="button button--primary" href="/daftar/">Mulai pendaftaran <Check size={17} aria-hidden="true" /></a></aside></div></section>
+</BaseLayout>

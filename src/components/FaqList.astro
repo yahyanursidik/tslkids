@@ -1,0 +1,8 @@
+---
+import { Plus } from 'lucide-astro';
+interface Item { data: { question: string; answer: string } }
+const { items } = Astro.props as { items: Item[] };
+---
+<div class="faq-list">
+  {items.map((item) => <details><summary>{item.data.question}<Plus size={19} aria-hidden="true" /></summary><p>{item.data.answer}</p></details>)}
+</div>

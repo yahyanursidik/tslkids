@@ -1,0 +1,61 @@
+---
+import { ArrowRight } from 'lucide-astro';
+interface Program { data: { title: string; slug: string; accent: string } }
+const { programs } = Astro.props as { programs: Program[] };
+const finderData = programs.map((program) => ({ title: program.data.title, slug: program.data.slug }));
+---
+<section class="finder" aria-labelledby="finder-title">
+  <div>
+    <p class="eyebrow">Mulai dari kebutuhan Ananda</p>
+    <h2 id="finder-title">Program Finder</h2>
+    <p class="lede">Pilih usia dan kebutuhan utama untuk melihat titik mulai yang bisa dipertimbangkan.</p>
+  </div>
+  <form id="program-finder" novalidate>
+    <fieldset class="finder-group">
+      <legend>Usia Ananda</legend>
+      <div class="finder-options">
+        {['4–6', '6–7', '8–13', '14–15'].map((age) => <label class="finder-option"><input type="radio" name="age" value={age} /><span>{age} tahun</span></label>)}
+      </div>
+    </fieldset>
+    <fieldset class="finder-group finder-group--spaced">
+      <legend>Kebutuhan utama</legend>
+      <div class="finder-options">
+        {['Mulai belajar Qur’an', 'Memperbaiki bacaan', 'Tahfizh', 'Private', 'Qur’an + diniyyah'].map((need) => <label class="finder-option"><input type="radio" name="need" value={need} /><span>{need}</span></label>)}
+      </div>
+    </fieldset>
+    <button class="button button--primary finder-submit" type="submit">Tampilkan rekomendasi <ArrowRight size={17} aria-hidden="true" /></button>
+    <p id="finder-error" class="form-status" data-state="error" hidden role="alert">Pilih usia dan kebutuhan utama terlebih dahulu.</p>
+  </form>
+  <div class="finder-result" id="finder-result" hidden aria-live="polite">
+    <p class="eyebrow">Rekomendasi awal</p>
+    <h3 id="finder-result-title"></h3>
+    <p id="finder-result-copy"></p>
+    <a id="finder-result-link" href="#">Pelajari program <ArrowRight size={16} aria-hidden="true" /></a>
+  </div>
+</section>
+<script define:vars={{ finderData }}>
+  const finder = document.querySelector('#program-finder');
+  const error = document.querySelector('#finder-error');
+  const result = document.querySelector('#finder-result');
+  const title = document.querySelector('#finder-result-title');
+  const copy = document.querySelector('#finder-result-copy');
+  const link = document.querySelector('#finder-result-link');
+  finder?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const values = new FormData(finder);
+    const age = String(values.get('age') || '');
+    const need = String(values.get('need') || '');
+    if (!age || !need) { error.hidden = false; result.hidden = true; return; }
+    error.hidden = true;
+    let selection = finderData[1];
+    let reason = 'Pendampingan personal dapat membantu pembelajaran mengikuti kebutuhan dan ritme Ananda.';
+    if (age === '4–6') { selection = finderData[0]; reason = 'Usia dini membutuhkan pengenalan Al-Qur’an yang sederhana, interaktif, dan bertahap.'; }
+    else if (need === 'Qur’an + diniyyah' || (age === '14–15' && need !== 'Private')) { selection = finderData[2]; reason = 'Program semester menggabungkan pembelajaran Qur’an dengan dasar ilmu diniyyah secara terarah.'; }
+    else if (need === 'Private' || need === 'Memperbaiki bacaan') { selection = finderData[1]; reason = 'Format satu guru untuk satu anak memberi ruang untuk talaqqi dan perbaikan bacaan yang lebih fokus.'; }
+    title.textContent = selection.title;
+    copy.textContent = reason;
+    link.href = `/program/${selection.slug}/`;
+    result.hidden = false;
+    result.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+  });
+</script>

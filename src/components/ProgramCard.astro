@@ -1,0 +1,11 @@
+---
+import { ArrowRight } from 'lucide-astro';
+interface Props { title: string; slug: string; ageMin: number; ageMax: number; summary: string; accent: 'yellow' | 'sky' | 'sage'; }
+const { title, slug, ageMin, ageMax, summary, accent } = Astro.props;
+---
+<article class={`program-card program-card--${accent}`}>
+  <span class="age-chip">{ageMin}–{ageMax} tahun</span>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <a href={`/program/${slug}/`}>Lihat detail <ArrowRight size={16} aria-hidden="true" /></a>
+</article>

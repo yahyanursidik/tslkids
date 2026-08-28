@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqList from '../components/FaqList.astro';
+const faqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="FAQ | TSL Kids" description="Jawaban atas pertanyaan umum seputar program TSL Kids.">
+  <section class="page-hero"><div class="container"><p class="eyebrow">FAQ</p><h1>Pertanyaan yang sering dibicarakan orang tua</h1><p class="lede">Jika jawaban yang Anda cari belum ada, silakan gunakan formulir pendaftaran untuk memulai konsultasi.</p></div></section>
+  <section class="section section--warm"><div class="container"><FaqList items={faqs} /></div></section>
+</BaseLayout>

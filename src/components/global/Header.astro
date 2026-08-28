@@ -1,0 +1,26 @@
+---
+import { Menu, Sprout } from 'lucide-astro';
+const links = [
+  { href: '/program/', label: 'Program' }, { href: '/cara-belajar/', label: 'Cara Belajar' },
+  { href: '/pengajar/', label: 'Pengajar' }, { href: '/faq/', label: 'FAQ' }, { href: '/tentang/', label: 'Tentang' },
+];
+---
+<header class="site-header">
+  <div class="container nav-inner">
+    <a class="brand" href="/" aria-label="TSL Kids, beranda">TSL Kids <Sprout size={21} stroke-width={2.25} aria-hidden="true" /></a>
+    <nav class="desktop-nav" aria-label="Navigasi utama">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+    <div class="desktop-actions">
+      <a class="button button--secondary" href="/daftar/#konsultasi">Konsultasi</a>
+      <a class="button button--primary" href="/daftar/">Daftar Program</a>
+    </div>
+    <details class="mobile-menu">
+      <summary aria-label="Buka navigasi"><Menu size={21} aria-hidden="true" /></summary>
+      <nav class="mobile-panel" aria-label="Navigasi seluler">
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+        <a href="/daftar/">Daftar Program</a>
+      </nav>
+    </details>
+  </div>
+</header>

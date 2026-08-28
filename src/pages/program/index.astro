@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramCard from '../../components/ProgramCard.astro';
+const programs = (await getCollection('programs')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Program TSL Kids" description="Temukan program Al-Qur'an online yang sesuai usia dan kebutuhan belajar anak.">
+  <section class="page-hero"><div class="container"><p class="eyebrow">Program TSL Kids</p><h1>Setiap anak dapat memulai dari jalur yang berbeda</h1><p class="lede">Tiga program dengan format dan fokus yang jelas untuk membantu orang tua menentukan titik mulai yang sesuai.</p></div></section>
+  <section class="section section--warm"><div class="container"><div class="program-grid">{programs.map((program) => <ProgramCard {...program.data} />)}</div></div></section>
+</BaseLayout>
