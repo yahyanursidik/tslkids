@@ -5,6 +5,14 @@ import Footer from '../components/global/Footer.astro';
 interface Props { title: string; description: string; }
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'Tarbiyah Sunnah Learning Kids',
+  alternateName: 'TSL Kids',
+  url: Astro.site?.toString(),
+  description: 'Program pembelajaran Al-Qur’an dan ilmu diniyyah untuk anak secara online dengan pendampingan sesuai usia.',
+};
 ---
 <!doctype html>
 <html lang="id">
@@ -18,6 +26,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     <title>{title}</title>
   </head>
   <body>
