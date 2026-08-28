@@ -2,10 +2,17 @@
 import { ArrowRight } from 'lucide-astro';
 interface Props { title: string; slug: string; ageMin: number; ageMax: number; summary: string; accent: 'yellow' | 'sky' | 'sage'; }
 const { title, slug, ageMin, ageMax, summary, accent } = Astro.props;
+const visuals = {
+  yellow: { src: '/images/growth-blocks.png', alt: 'Balok belajar dan tanaman muda' },
+  sky: { src: '/images/private-notebook.png', alt: 'Buku catatan dan pensil untuk pembelajaran private' },
+  sage: { src: '/images/madrasah-book.png', alt: "Buku Al-Qur'an dan tanaman untuk Madrasah Qur'an Anak" },
+};
+const visual = visuals[accent];
 ---
 <article class={`program-card program-card--${accent}`}>
   <span class="age-chip">{ageMin}–{ageMax} tahun</span>
   <h3>{title}</h3>
   <p>{summary}</p>
+  <img class="program-card-visual" src={visual.src} alt={visual.alt} width="1280" height="1280" loading="lazy" decoding="async" />
   <a href={`/program/${slug}/`}>Lihat detail <ArrowRight size={16} aria-hidden="true" /></a>
 </article>
