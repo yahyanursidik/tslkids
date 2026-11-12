@@ -1,6 +1,6 @@
 ---
 question: Apakah anak harus sudah bisa membaca Al-Qur'an?
-answer: Tidak. Madrasah Qur'an Anak Usia Dini dapat menjadi titik awal, sementara kebutuhan anak yang lebih besar dapat dikonsultasikan agar programnya sesuai.
+answer: Anak bisa mulai dari kemampuannya saat ini. Madrasah Anak Usia Dini mencakup pengenalan huruf hijaiyah untuk usia 3–6 tahun. Orang tua dapat berkonsultasi dengan admin untuk menentukan titik mulai pada program lain.
 category: program
 order: 2
 ---

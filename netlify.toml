@@ -2,6 +2,19 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  NPM_VERSION = "12.2.2"
+
+[[redirects]]
+  from = "/program/quran-private/"
+  to = "/program/"
+  status = 301
+
+[[redirects]]
+  from = "/program/madrasah-quran-anak/"
+  to = "/program/madrasah-usia-dasar/"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]

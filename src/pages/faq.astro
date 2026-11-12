@@ -1,10 +1,30 @@
 ---
 import { getCollection } from 'astro:content';
+import { MessageCircle } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FaqList from '../components/FaqList.astro';
+import { contact } from '../lib/site';
+
 const faqs = (await getCollection('faqs')).sort((a, b) => a.data.order - b.data.order);
 ---
-<BaseLayout title="FAQ | TSL Kids" description="Jawaban atas pertanyaan umum seputar program TSL Kids.">
-  <section class="page-hero"><div class="container"><p class="eyebrow">FAQ</p><h1>Pertanyaan yang sering dibicarakan orang tua</h1><p class="lede">Jika jawaban yang Anda cari belum ada, silakan gunakan formulir pendaftaran untuk memulai konsultasi.</p></div></section>
-  <section class="section section--warm"><div class="container"><FaqList items={faqs} /></div></section>
+<BaseLayout title="FAQ | TSL Kids" description="Jawaban untuk orang tua tentang usia, materi, pilihan jadwal, dan cara belajar di TSL Kids.">
+  <section class="page-hero">
+    <div class="container wrap">
+      <h1>Pertanyaan orang tua</h1>
+      <p class="lede">Cari tahu perbedaan program, jadwal kelas, dan cara mendampingi Ananda.</p>
+    </div>
+  </section>
+  <section class="section section--compact" aria-labelledby="faq-title">
+    <div class="container wrap content-grid">
+      <div>
+        <h2 id="faq-title" class="sr-only">Pertanyaan umum tentang program</h2>
+        <FaqList items={faqs} />
+      </div>
+      <aside class="support-panel">
+        <h2>Pertanyaan lainnya</h2>
+        <p>Hubungi admin untuk membahas pilihan kelas atau jadwal yang sesuai.</p>
+        <a class="button button--secondary" href={contact.whatsapp}><MessageCircle size={18} aria-hidden="true" /> Tanya admin</a>
+      </aside>
+    </div>
+  </section>
 </BaseLayout>

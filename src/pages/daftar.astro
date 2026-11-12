@@ -1,7 +1,133 @@
 ---
+import { ArrowRight, MessageCircle } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ageLabel, getPrograms, programAges } from '../lib/programs';
+import { contact } from '../lib/site';
+
+const programs = (await getPrograms()).map(({ data }) => data);
 ---
 <BaseLayout title="Daftar Program | TSL Kids" description="Sampaikan minat dan kebutuhan belajar Ananda kepada TSL Kids.">
-  <section class="page-hero"><div class="container"><p class="eyebrow">Daftar program</p><h1>Mari mulai dari kebutuhan Ananda</h1><p class="lede">Isi informasi singkat berikut. Ini adalah langkah awal untuk membantu memilih bentuk pendampingan yang sesuai.</p></div></section>
-  <section class="section section--warm"><div class="container content-grid"><form class="content-panel registration" name="pendaftaran-tsl-kids" method="POST" action="/terima-kasih/" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="pendaftaran-tsl-kids" /><p class="honeypot"><label>Jangan isi kolom ini <input name="bot-field" /></label></p><div class="form-row"><div class="field"><label for="child-name">Nama anak</label><input id="child-name" name="child-name" autocomplete="name" required /><span class="field-help">Gunakan nama panggilan bila lebih nyaman.</span></div><div class="field"><label for="child-age">Usia anak</label><select id="child-age" name="child-age" required><option value="">Pilih usia</option>{Array.from({ length: 12 }, (_, index) => index + 4).map((age) => <option value={age}>{age} tahun</option>)}</select><span class="field-help">Rentang program saat ini 4–15 tahun.</span></div></div><div class="field"><label for="program-interest">Program yang dipertimbangkan</label><select id="program-interest" name="program-interest" required><option value="">Pilih program</option><option value="Madrasah Qur'an Usia Dini">Madrasah Qur'an Usia Dini</option><option value="Qur'an Private Anak">Qur'an Private Anak</option><option value="Madrasah Qur'an Anak">Madrasah Qur'an Anak</option><option value="Belum yakin">Belum yakin, perlu dibantu memilih</option></select><span class="field-help">Anda masih dapat berkonsultasi sebelum memilih.</span></div><div class="form-row"><div class="field"><label for="parent-name">Nama orang tua/wali</label><input id="parent-name" name="parent-name" autocomplete="name" required /><span class="field-help"></span></div><div class="field"><label for="contact">Nomor WhatsApp</label><input id="contact" name="contact" inputmode="tel" autocomplete="tel" required placeholder="Contoh: 0812 3456 7890" /><span class="field-help"></span></div></div><div class="field"><label for="need">Kebutuhan belajar</label><textarea id="need" name="need" required placeholder="Contoh: ingin mulai membaca Al-Qur'an atau memperbaiki bacaan"></textarea><span class="field-help">Ceritakan singkat titik mulai yang Anda pertimbangkan.</span></div><label class="finder-option"><input type="checkbox" id="privacy" name="privacy-consent" value="setuju" required /><span>Saya menyetujui penggunaan data ini untuk menindaklanjuti pendaftaran.</span></label><button class="button button--primary" type="submit">Kirim minat pendaftaran</button></form><aside class="content-panel" id="konsultasi"><p class="eyebrow">Sebelum mengisi</p><h2>Data Anda dijaga seperlunya</h2><p>Form ini tidak mengumpulkan informasi sensitif anak. Data digunakan untuk menindaklanjuti minat pendaftaran dan membantu pembicaraan awal.</p><p>Untuk konsultasi singkat, sampaikan usia anak dan kebutuhan belajarnya melalui jalur kontak resmi TSL Kids.</p></aside></div></section>
+  <section class="page-hero">
+    <div class="container wrap">
+      <h1>Daftar program</h1>
+      <p class="lede">Isi minat belajar Ananda. Admin TSL Kids akan menindaklanjuti melalui nomor WhatsApp orang tua atau wali.</p>
+    </div>
+  </section>
+
+  <section class="section section--compact registration-section" aria-labelledby="registration-title">
+    <div class="container wrap content-grid">
+      <form
+        class="registration"
+        name="pendaftaran-tsl-kids"
+        method="POST"
+        action="/terima-kasih/"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        data-registration
+      >
+        <h2 id="registration-title">Formulir minat belajar</h2>
+        <input type="hidden" name="form-name" value="pendaftaran-tsl-kids" />
+        <div hidden><label>Jangan isi kolom ini <input name="bot-field" tabindex="-1" autocomplete="off" /></label></div>
+
+        <fieldset>
+          <legend>Data Ananda</legend>
+          <div class="form-row">
+            <div class="field">
+              <label for="child-name">Nama panggilan anak</label>
+              <input id="child-name" name="child-name" autocomplete="section-child given-name" maxlength="80" required />
+            </div>
+            <div class="field">
+              <label for="child-age">Usia anak</label>
+              <select id="child-age" name="child-age" required>
+                <option value="">Pilih usia</option>
+                {programAges(programs).map((age) => <option value={age}>{age} tahun</option>)}
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="program-interest">Pilihan program</label>
+            <select id="program-interest" name="program-interest" aria-describedby="program-help program-error" required>
+              <option value="">Pilih program</option>
+              {programs.map((program) => (
+                <option
+                  value={program.title}
+                  data-program={program.slug}
+                  data-age-min={program.ageMin}
+                  data-age-max={program.ageMax}
+                >{program.title} · {ageLabel(program)}</option>
+              ))}
+              <option value="Belum yakin">Belum yakin, perlu dibantu memilih</option>
+            </select>
+            <p class="field-help" id="program-help">Pilih “Belum yakin” jika Anda ingin dibantu admin.</p>
+            <p class="field-error" id="program-error" role="status"></p>
+          </div>
+          <div class="field">
+            <label for="need">Kebutuhan belajar</label>
+            <textarea id="need" name="need" rows="3" maxlength="500" aria-describedby="need-help" required></textarea>
+            <p class="field-help" id="need-help">Ceritakan singkat apa yang ingin dipelajari Ananda.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Kontak orang tua atau wali</legend>
+          <div class="form-row">
+            <div class="field">
+              <label for="parent-name">Nama orang tua atau wali</label>
+              <input id="parent-name" name="parent-name" autocomplete="section-parent name" maxlength="100" required />
+            </div>
+            <div class="field">
+              <label for="contact">Nomor WhatsApp</label>
+              <input id="contact" name="contact" type="tel" autocomplete="section-parent tel" maxlength="30" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <label class="consent">
+          <input type="checkbox" id="privacy" name="privacy-consent" value="setuju" required />
+          <span>Saya menyetujui penggunaan data ini untuk menindaklanjuti pendaftaran.</span>
+        </label>
+        <p class="field-help"><a href="/kebijakan-privasi/">Baca kebijakan privasi</a></p>
+        <button class="button button--primary" type="submit">Kirim minat pendaftaran <ArrowRight size={19} aria-hidden="true" /></button>
+      </form>
+
+      <aside class="support-panel" id="konsultasi">
+        <h2>Bantuan memilih program</h2>
+        <p>Sebutkan usia dan tujuan belajar Ananda saat menghubungi admin.</p>
+        <a class="button button--secondary" href={contact.whatsapp}><MessageCircle size={18} aria-hidden="true" /> Tanya admin</a>
+        <a class="text-link" href="/#cari-program">Gunakan pencari program <ArrowRight size={17} aria-hidden="true" /></a>
+      </aside>
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-registration]');
+  const ageSelect = form?.querySelector<HTMLSelectElement>('#child-age');
+  const programSelect = form?.querySelector<HTMLSelectElement>('#program-interest');
+  const error = form?.querySelector<HTMLElement>('#program-error');
+
+  if (form && ageSelect && programSelect && error) {
+    const fromProgram = new URLSearchParams(window.location.search).get('program');
+    const preselected = Array.from(programSelect.options).find((option) => option.dataset.program === fromProgram);
+    if (preselected && !programSelect.value) programSelect.value = preselected.value;
+
+    const validateAge = () => {
+      const age = Number(ageSelect.value);
+      const option = programSelect.selectedOptions[0];
+      const min = Number(option?.dataset.ageMin);
+      const max = Number(option?.dataset.ageMax);
+      const message = age && min && (age < min || age > max)
+        ? `Program ini untuk usia ${min}–${max} tahun. Pilih program sesuai usia Ananda.`
+        : '';
+
+      programSelect.setCustomValidity(message);
+      if (message) programSelect.setAttribute('aria-invalid', 'true');
+      else programSelect.removeAttribute('aria-invalid');
+      error.textContent = message;
+    };
+
+    form.addEventListener('change', validateAge);
+    window.addEventListener('pageshow', validateAge);
+    validateAge();
+  }
+</script>

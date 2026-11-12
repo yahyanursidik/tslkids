@@ -1,8 +1,41 @@
 ---
-import { Ear, MessageCircle, Check, RefreshCw, Sprout } from 'lucide-astro';
+import { ArrowRight } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LearningSteps from '../components/LearningSteps.astro';
 ---
-<BaseLayout title="Cara Belajar | TSL Kids" description="Memahami proses pembelajaran Al-Qur'an anak yang bertahap dan terarah di TSL Kids.">
-  <section class="page-hero"><div class="container"><p class="eyebrow">Cara belajar</p><h1>Belajar yang memberi ruang untuk bertumbuh</h1><p class="lede">Pembelajaran dimulai dari kemampuan anak saat ini, lalu dilanjutkan dengan latihan dan pendampingan yang konsisten.</p></div></section>
-  <section class="section section--warm"><div class="container"><div class="talaqqi"><div class="talaqqi-stage"><Ear size={18} aria-hidden="true" /><strong>Mendengar</strong><span>Pengajar memberi contoh bacaan.</span></div><div class="talaqqi-stage"><MessageCircle size={18} aria-hidden="true" /><strong>Menirukan</strong><span>Anak mencoba dalam tempo yang sesuai.</span></div><div class="talaqqi-stage"><Check size={18} aria-hidden="true" /><strong>Diperbaiki</strong><span>Kesalahan diperbaiki secara bertahap.</span></div><div class="talaqqi-stage"><RefreshCw size={18} aria-hidden="true" /><strong>Mengulang</strong><span>Latihan membantu bacaan menjadi lebih mantap.</span></div><div class="talaqqi-stage"><Sprout size={18} aria-hidden="true" /><strong>Bertumbuh</strong><span>Kebiasaan belajar dibangun dari proses kecil yang konsisten.</span></div></div></div></section>
+<BaseLayout title="Cara Belajar | TSL Kids" description="Kenali tahapan latihan bacaan dan cara orang tua mendampingi kelas Al-Qur’an anak dari rumah.">
+  <section class="page-hero">
+    <div class="container wrap">
+      <h1>Cara Ananda belajar</h1>
+      <p class="lede">Guru mulai dari kemampuan Ananda, memberi contoh, lalu membimbing latihan dan pengulangan.</p>
+    </div>
+  </section>
+
+  <section class="section section--compact" aria-labelledby="tahapan">
+    <div class="container wrap">
+      <header class="section-heading"><h2 id="tahapan">Tahapan latihan bacaan</h2></header>
+      <LearningSteps />
+    </div>
+  </section>
+
+  <section class="section section--compact section--sage">
+    <div class="container wrap content-grid">
+      <div>
+        <h2>Peran orang tua di rumah</h2>
+        <p>Siapkan perangkat dan tempat yang nyaman untuk kelas online. Setelah kelas, temani Ananda mengulang bacaan atau hafalan sesuai arahan guru.</p>
+        <a class="text-link" href="/program/">Bandingkan program <ArrowRight size={18} aria-hidden="true" /></a>
+      </div>
+      <img
+        class="rounded-photo"
+        src="/images/parent-partnership.webp"
+        srcset="/images/parent-partnership-480.webp 480w, /images/parent-partnership-720.webp 720w, /images/parent-partnership.webp 960w"
+        sizes="auto, (min-width: 90rem) 29rem, (min-width: 56rem) 33vw, 89vw"
+        alt="Sudut rumah dengan sofa dan meja kecil"
+        width="960"
+        height="720"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </section>
 </BaseLayout>

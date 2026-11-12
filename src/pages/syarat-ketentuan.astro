@@ -1,4 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../lib/site';
 ---
-<BaseLayout title="Syarat & Ketentuan | TSL Kids" description="Syarat dan ketentuan program TSL Kids."><section class="page-hero"><div class="container"><p class="eyebrow">Syarat & ketentuan</p><h1>Ketentuan program akan disampaikan sesuai pilihan belajar</h1><p class="lede">Informasi operasional seperti jadwal dan infaq aktif perlu dikonfirmasi melalui kanal resmi sebelum pendaftaran diselesaikan.</p></div></section></BaseLayout>
+<BaseLayout title="Syarat & Ketentuan | TSL Kids" description="Informasi awal mengenai pemilihan kelas dan proses pendaftaran TSL Kids.">
+  <section class="page-hero">
+    <div class="container wrap"><h1>Syarat &amp; ketentuan</h1></div>
+  </section>
+  <section class="section section--compact">
+    <div class="container wrap">
+      <div class="prose">
+        <h2>Pemilihan program</h2>
+        <p>Pilih kelas sesuai rentang usia yang tercantum pada <a href="/program/">halaman program</a>. Orang tua atau wali dapat berkonsultasi sebelum mengisi formulir minat belajar.</p>
+        <h2>Konfirmasi kelas</h2>
+        <p>Setelah menerima formulir, admin dapat menghubungi orang tua atau wali untuk membahas pilihan program. Konfirmasikan jadwal, ketentuan kelas, dan infaq yang berlaku melalui <a href={contact.whatsapp}>WhatsApp TSL Kids</a> sebelum menyelesaikan pendaftaran.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

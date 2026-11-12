@@ -1,47 +1,39 @@
-/* Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5 */
-/* Hallmark · macrostructure: Narrative Workflow · tone: gentle learning · anchor hue: forest green
- * audience: orang tua/wali · use: menemukan program yang sesuai · theme: Garden
- * nav: N1b · footer: Ft3 · enrichment: Tier A CSS learning tableau · contrast: pass (40–41)
- */
+/* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V4 */
+/* Hallmark · macrostructure: Catalogue · tone: warm, playful education · anchor hue: forest green */
 :root {
-  --color-forest: oklch(42% 0.075 153);
-  --color-forest-deep: oklch(31% 0.055 153);
-  --color-sage: oklch(80% 0.066 145);
-  --color-sage-soft: oklch(92% 0.028 145);
-  --color-cream: oklch(97.5% 0.012 90);
-  --color-cream-deep: oklch(93% 0.022 88);
-  --color-yellow: oklch(84% 0.13 82);
-  --color-sky: oklch(77% 0.08 230);
-  --color-terracotta: oklch(67% 0.12 35);
-  --color-ink: oklch(25% 0.025 155);
-  --color-ink-soft: oklch(43% 0.02 155);
-  --color-muted: oklch(51% 0.018 155);
-  --color-rule: oklch(87% 0.018 145);
-  --color-surface: oklch(100% 0 0);
-  --color-error: oklch(53% 0.18 28);
-  --color-focus: oklch(45% 0.13 245);
-  --color-shadow: oklch(25% 0.025 155 / 0.13);
-  --color-tablet: oklch(38% 0.02 155);
-  --color-footer-rule: oklch(80% 0.066 145 / 0.25);
-  --color-cream-translucent: oklch(97.5% 0.012 90 / 0.88);
-  --color-surface-translucent: oklch(100% 0 0 / 0.72);
-  --color-surface-rule: oklch(87% 0.018 145 / 0.72);
-  --color-accent: var(--color-forest);
-  --color-accent-ink: var(--color-surface);
+  --color-forest: oklch(36% 0.078 154);
+  --color-forest-deep: oklch(27% 0.057 155);
+  --color-leaf: oklch(46% 0.109 152);
+  --color-ink: oklch(25% 0.033 153);
+  --color-ink-soft: oklch(39% 0.035 151);
+  --color-cream: oklch(97.8% 0.013 86);
+  --color-surface: oklch(99.3% 0.007 90);
+  --color-sage: oklch(81% 0.105 140);
+  --color-sage-soft: oklch(93.6% 0.049 139);
+  --color-sky: oklch(80% 0.095 233);
+  --color-sky-soft: oklch(93.8% 0.04 230);
+  --color-yellow: oklch(86% 0.139 86);
+  --color-yellow-soft: oklch(94.8% 0.066 90);
+  --color-terracotta: oklch(77% 0.114 43);
+  --color-terracotta-soft: oklch(93% 0.043 47);
+  --color-rule: oklch(74% 0.025 149);
+  --color-focus: oklch(41% 0.128 249);
+  --color-error: oklch(42% 0.15 28);
+  --color-footer-text: oklch(94% 0.033 143);
 
-  --font-display: 'Nunito Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Nunito Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-bold: 700;
   --weight-extrabold: 800;
-  --text-display: clamp(2.35rem, 4.7vw, 4.75rem);
-  --text-h1: clamp(2.15rem, 4vw, 4.25rem);
-  --text-h2: clamp(1.8rem, 2.8vw, 3rem);
-  --text-h3: clamp(1.2rem, 1.7vw, 1.55rem);
-  --text-body-lg: clamp(1rem, 1.15vw, 1.125rem);
-  --text-body: 0.96rem;
-  --text-small: 0.78rem;
+  --text-display: clamp(2.5rem, 5.2vw, 5rem);
+  --text-h1: clamp(2.5rem, 4.6vw, 4.5rem);
+  --text-h2: clamp(1.9rem, 3.2vw, 3.25rem);
+  --text-h3: clamp(1.35rem, 2.1vw, 1.9rem);
+  --text-body-lg: clamp(1.05rem, 1.4vw, 1.2rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -54,20 +46,20 @@
   --space-12: 3rem;
   --space-16: 4rem;
   --space-20: 5rem;
-  --space-section-sm: clamp(3rem, 6vw, 5rem);
-  --space-section-md: clamp(4.5rem, 8vw, 8rem);
-  --space-section-lg: clamp(6rem, 11vw, 11rem);
+  --space-24: 6rem;
+  --space-section-sm: clamp(2.75rem, 5vw, 4.5rem);
+  --space-section-md: clamp(3.5rem, 7vw, 6.5rem);
 
   --radius-sm: 0.5rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
   --rule-thin: 1px;
-  --page-max: 76rem;
-  --page-gutter: clamp(1rem, 4vw, 2.5rem);
+  --page-max: 80rem;
+  --page-gutter: clamp(1.125rem, 5.56vw, 5rem);
+  --header-height: 4.25rem;
+  --control-height: 3rem;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 150ms;
+  --dur-fast: 160ms;
   --dur-base: 240ms;
-  --dur-slow: 460ms;
 }
