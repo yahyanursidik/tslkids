@@ -1,0 +1,20 @@
+---
+const steps = [
+  { icon: 'ear', title: 'Mendengar', copy: 'Ananda mendengar contoh bacaan dari guru.' },
+  { icon: 'chat', title: 'Menirukan', copy: 'Ananda mencoba membaca sesuai kemampuannya.' },
+  { icon: 'check', title: 'Menerima koreksi', copy: 'Guru membantu memperbaiki bacaan secara bertahap.' },
+  { icon: 'repeat', title: 'Mengulang', copy: 'Ananda berlatih kembali agar bacaannya lebih mantap.' },
+  { icon: 'grow', title: 'Bertumbuh', copy: 'Latihan menjadi kebiasaan yang bisa diteruskan di rumah.' },
+];
+---
+<ol class="learning-steps">
+  {steps.map(({ icon, title, copy }) => (
+    <li>
+      <img src={`/images/journey-${icon}.webp`} alt="" width="144" height="144" loading="lazy" decoding="async" />
+      <div>
+        <strong class="learning-step-label">{title}</strong>
+        <p>{copy}</p>
+      </div>
+    </li>
+  ))}
+</ol>

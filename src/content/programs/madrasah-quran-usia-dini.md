@@ -1,19 +1,33 @@
 ---
-title: "Madrasah Qur'an Anak Usia Dini"
+title: Madrasah Anak Usia Dini
 slug: madrasah-quran-usia-dini
-shortTitle: "Madrasah Qur'an Usia Dini"
-ageMin: 4
+ageMin: 3
 ageMax: 6
-format: Kelas online interaktif
-mode: online
-duration: Belajar bertahap sesuai usia
-focus: [Membaca Al-Qur'an, Hafalan bertahap, Tauhid dan adab dasar]
-summary: "Pengalaman awal belajar Al-Qur'an dan ilmu diniyyah yang dirancang sesuai tahap usia dini."
-status: active
+track: madrasah
+format: Kelas bersama dan sesi individual
+schedule:
+  type: weekly
+  meetingsPerWeek: 3
+  platform: Google Meet
+  timeSlots: [Pagi, Sore, Malam]
+summary: Kelas interaktif untuk mengenal Al-Qur’an, ilmu diniyyah, dan hafalan sesuai usia.
 order: 1
-accent: yellow
-suitableFor: "Anak usia dini yang memulai kedekatan dengan Al-Qur'an melalui kegiatan belajar yang sederhana dan terarah."
-parentRole: "Membantu menyiapkan suasana belajar yang tenang dan menemani kebiasaan baik di rumah."
+accent: sage
+illustration: growth-blocks
 ---
 
-Pembelajaran memperhatikan rentang perhatian anak. Fokusnya bukan mengejar banyaknya materi, melainkan membangun pengalaman pertama yang positif dan bertahap.
+### Kelas bersama
+
+#### Diniyyah · 1 jam
+
+Ananda belajar mengenal akidah, ibadah, adab, dan nilai-nilai Islam melalui kegiatan yang sesuai dengan usianya.
+
+### Sesi individual bergiliran
+
+#### Tahsin privat · 15 menit per anak
+
+Guru membimbing Ananda mengenal huruf hijaiyah dan berlatih membaca Al-Qur’an secara individual.
+
+#### Tahfidz privat · 15 menit per anak
+
+Ananda menghafal surah pendek sesuai kemampuan, menyetorkan hafalan, dan melakukan murajaah dengan bimbingan guru.

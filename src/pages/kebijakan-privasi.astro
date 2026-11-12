@@ -1,4 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../lib/site';
 ---
-<BaseLayout title="Kebijakan Privasi | TSL Kids" description="Kebijakan privasi TSL Kids."><section class="page-hero"><div class="container"><p class="eyebrow">Kebijakan privasi</p><h1>Data digunakan seperlunya untuk menindaklanjuti pendaftaran</h1><p class="lede">Dokumen ini perlu dilengkapi dengan detail pengelola data dan kanal kontak resmi sebelum situs dipublikasikan.</p></div></section></BaseLayout>
+<BaseLayout title="Kebijakan Privasi | TSL Kids" description="Informasi penggunaan data pada formulir minat belajar TSL Kids.">
+  <section class="page-hero">
+    <div class="container wrap"><h1>Kebijakan privasi</h1></div>
+  </section>
+  <section class="section section--compact">
+    <div class="container wrap">
+      <div class="prose">
+        <h2>Data formulir minat belajar</h2>
+        <p>Formulir diisi oleh orang tua atau wali. TSL Kids meminta nama panggilan dan usia anak, pilihan program, kebutuhan belajar, serta nama dan nomor WhatsApp orang tua atau wali.</p>
+        <h2>Penggunaan data</h2>
+        <p>Data ini digunakan untuk membahas kebutuhan belajar dan menindaklanjuti minat pendaftaran. Tuliskan informasi yang diperlukan untuk memilih kelas.</p>
+        <h2>Pertanyaan tentang data</h2>
+        <p>Hubungi TSL Kids melalui <a href={contact.whatsapp}>WhatsApp {contact.whatsappLabel}</a> untuk pertanyaan tentang data pendaftaran.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

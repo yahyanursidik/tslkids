@@ -5,14 +5,17 @@ Brand: **Tarbiyah Sunnah Learning Kids (TSL Kids)**
 
 Repository documentation ini menjadi sumber kebenaran utama untuk pengembangan website TSL Kids.
 
+Pembaruan 12 November 2026 berlaku untuk katalog dan stack. Gunakan [koleksi program](../src/content/programs/) untuk nama, usia, jadwal, dan materi aktif. Catatan awal di folder `docs/` masih memuat rancangan tiga program.
+
 ## Stack
 
-- Astro 7
-- TypeScript
+- Node.js 26.13.1 LTS dan npm 12.2.2
+- Astro 7.4
+- TypeScript 6, sesuai dukungan `astro check`
 - Astro Content Collections
 - Native CSS + CSS Custom Properties / Design Tokens
-- Hallmark sebagai anti-AI-slop design guardrail
-- Lucide Icons
+- Taste Skill dan Hallmark untuk peninjauan desain
+- Lucide Icons melalui `@lucide/astro`
 - CSS Animation / Web Animations API / IntersectionObserver seperlunya
 - Netlify
 - Static-first architecture
@@ -26,7 +29,7 @@ Repository documentation ini menjadi sumber kebenaran utama untuk pengembangan w
 5. Motion must have purpose.
 6. Anti-AI-slop by construction.
 7. Tidak menggunakan pola visual Islamic-template generik.
-8. Tidak menjadikan website terlalu kekanak-kanakan karena rentang usia program sampai 15 tahun.
+8. Gunakan visual yang ceria dan nyaman dibaca orang tua.
 9. Orang tua adalah audience utama website.
 10. Website harus membantu orang tua menemukan program yang sesuai untuk anak.
 

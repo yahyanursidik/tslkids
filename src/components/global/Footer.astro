@@ -1,17 +1,54 @@
 ---
-import { Sprout } from 'lucide-astro';
+import { ArrowUpRight, MessageCircle, Sprout } from '@lucide/astro';
+import { getPrograms, programUrl } from '../../lib/programs';
+import { contact, siteTagline } from '../../lib/site';
+
+const { closing = false } = Astro.props as { closing?: boolean };
+const programs = await getPrograms();
 ---
-<footer class="site-footer">
-  <div class="container footer-top">
-    <div class="footer-brand">
-      <a class="brand" href="/">TSL Kids <Sprout size={20} aria-hidden="true" /></a>
-      <p>Belajar Al-Qur'an. Sedikit demi sedikit. Bertumbuh sepanjang perjalanan.</p>
-    </div>
-    <div class="footer-columns">
-      <div><h2>Program</h2><ul><li><a href="/program/madrasah-quran-usia-dini/">Usia Dini</a></li><li><a href="/program/quran-private/">Qur'an Private</a></li><li><a href="/program/madrasah-quran-anak/">Madrasah Anak</a></li></ul></div>
-      <div><h2>Informasi</h2><ul><li><a href="/cara-belajar/">Cara Belajar</a></li><li><a href="/pengajar/">Pengajar</a></li><li><a href="/faq/">FAQ</a></li><li><a href="/tentang/">Tentang</a></li></ul></div>
-      <div><h2>Hubungi Kami</h2><ul><li><a href="/daftar/">Daftar Program</a></li><li><a href="/kebijakan-privasi/">Kebijakan Privasi</a></li><li><a href="/syarat-ketentuan/">Syarat & Ketentuan</a></li></ul></div>
+<footer class:list={['site-footer', { closing }]} id="kontak">
+  <div class="container wrap">
+    {closing && (
+      <div class="footer-callout">
+        <div>
+          <h2>Konsultasi program</h2>
+          <p>Ceritakan usia dan kebutuhan belajar Ananda kepada admin TSL Kids.</p>
+        </div>
+        <a class="text-link footer-contact-link" href={contact.whatsapp}>
+          <MessageCircle size={19} aria-hidden="true" /> Tanya admin
+        </a>
+      </div>
+    )}
+    <div class="footer-directory">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="/" aria-label="TSL Kids, beranda">
+            <span class="brand-mark"><Sprout size={21} aria-hidden="true" /></span>
+            <span>TSL Kids</span>
+          </a>
+          <p>Tarbiyah Sunnah Learning Kids</p>
+          <p class="footer-tagline">{siteTagline}</p>
+        </div>
+        <nav class="footer-links" aria-label="Program TSL Kids">
+          <p class="footer-label">Program</p>
+          <ul>
+            {programs.map(({ data }) => <li><a href={programUrl(data)}>{data.title}</a></li>)}
+          </ul>
+        </nav>
+        <nav class="footer-links" aria-label="Bantuan dan kontak">
+          <p class="footer-label">Kontak resmi</p>
+          <ul>
+            <li><a href={contact.whatsapp}>WhatsApp {contact.whatsappLabel} <ArrowUpRight size={14} aria-hidden="true" /></a></li>
+            <li><a href={contact.instagram}>Instagram {contact.instagramLabel} <ArrowUpRight size={14} aria-hidden="true" /></a></li>
+            <li><a href={contact.website}>Website {contact.websiteLabel} <ArrowUpRight size={14} aria-hidden="true" /></a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p>© {new Date().getFullYear()} TSL Kids</p>
+        <a href="/kebijakan-privasi/">Kebijakan Privasi</a>
+        <a href="/syarat-ketentuan/">Syarat &amp; Ketentuan</a>
+      </div>
     </div>
   </div>
-  <div class="container footer-bottom">© {new Date().getFullYear()} TSL Kids. Semua hak dilindungi.</div>
 </footer>

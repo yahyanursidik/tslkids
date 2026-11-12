@@ -1,26 +1,70 @@
 ---
-import { Menu, Sprout } from 'lucide-astro';
+import { ArrowUpRight, Menu, Sprout, X } from '@lucide/astro';
+import { contact } from '../../lib/site';
+
 const links = [
-  { href: '/program/', label: 'Program' }, { href: '/cara-belajar/', label: 'Cara Belajar' },
-  { href: '/pengajar/', label: 'Pengajar' }, { href: '/faq/', label: 'FAQ' }, { href: '/tentang/', label: 'Tentang' },
+  { href: '/program/', label: 'Program' },
+  { href: '/cara-belajar/', label: 'Cara Belajar' },
+  { href: '/pengajar/', label: 'Pengajar' },
+  { href: '/faq/', label: 'FAQ' },
+  { href: '/tentang/', label: 'Tentang' },
 ];
+
+const currentPath = Astro.url.pathname;
+const current = (href: string) =>
+  currentPath === href || (href === '/program/' && currentPath.startsWith(href)) ? 'page' : undefined;
 ---
-<header class="site-header">
-  <div class="container nav-inner">
-    <a class="brand" href="/" aria-label="TSL Kids, beranda">TSL Kids <Sprout size={21} stroke-width={2.25} aria-hidden="true" /></a>
+<header class="site-header nav">
+  <div class="container wrap nav-inner">
+    <a class="skip-link" href="#konten">Lewati ke konten</a>
+    <a class="brand" href="/" aria-label="TSL Kids, beranda">
+      <span class="brand-mark"><Sprout size={21} aria-hidden="true" /></span>
+      <span>TSL Kids</span>
+    </a>
     <nav class="desktop-nav" aria-label="Navigasi utama">
-      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      {links.map(({ href, label }) => <a {href} aria-current={current(href)}>{label}</a>)}
     </nav>
-    <div class="desktop-actions">
-      <a class="button button--secondary" href="/daftar/#konsultasi">Konsultasi</a>
-      <a class="button button--primary" href="/daftar/">Daftar Program</a>
+    <div class="header-actions">
+      <a class="consult-link text-link" href={contact.whatsapp}>Konsultasi <ArrowUpRight size={15} aria-hidden="true" /></a>
+      <a class="button button--primary header-register" href="/daftar/">
+        <span>Daftar<span class="register-full-label"> program</span></span>
+      </a>
+      <details class="mobile-menu" data-mobile-menu>
+        <summary class="nav__toggle" aria-label="Menu navigasi" aria-controls="mobile-navigation">
+          <Menu class="menu-icon" size={22} aria-hidden="true" />
+          <X class="menu-close-icon" size={22} aria-hidden="true" />
+        </summary>
+        <nav id="mobile-navigation" class="mobile-panel" aria-label="Navigasi seluler">
+          <ul class="container">
+            {links.map(({ href, label }) => <li><a {href} aria-current={current(href)}>{label}</a></li>)}
+            <li><a href={contact.whatsapp}>Konsultasi <ArrowUpRight size={16} aria-hidden="true" /></a></li>
+          </ul>
+        </nav>
+      </details>
     </div>
-    <details class="mobile-menu">
-      <summary aria-label="Buka navigasi"><Menu size={21} aria-hidden="true" /></summary>
-      <nav class="mobile-panel" aria-label="Navigasi seluler">
-        {links.map((link) => <a href={link.href}>{link.label}</a>)}
-        <a href="/daftar/">Daftar Program</a>
-      </nav>
-    </details>
   </div>
 </header>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
+  const toggle = menu?.querySelector('summary');
+
+  if (menu && toggle) {
+    const sync = () => toggle.setAttribute('aria-expanded', String(menu.open));
+    sync();
+    menu.addEventListener('toggle', sync);
+    menu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.open = false;
+        toggle.focus();
+      }
+    });
+    menu.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a')) menu.open = false;
+    });
+    const desktop = window.matchMedia('(min-width: 64rem)');
+    desktop.addEventListener('change', () => {
+      if (desktop.matches) menu.open = false;
+    });
+  }
+</script>

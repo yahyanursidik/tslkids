@@ -1,8 +1,15 @@
 ---
-import { Plus } from 'lucide-astro';
-interface Item { data: { question: string; answer: string } }
-const { items } = Astro.props as { items: Item[] };
+import { Plus } from '@lucide/astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props { items: CollectionEntry<'faqs'>[] }
+const { items } = Astro.props;
 ---
 <div class="faq-list">
-  {items.map((item) => <details><summary>{item.data.question}<Plus size={19} aria-hidden="true" /></summary><p>{item.data.answer}</p></details>)}
+  {items.map(({ data }) => (
+    <details name="pertanyaan-program">
+      <summary><span>{data.question}</span><Plus size={21} aria-hidden="true" /></summary>
+      <p>{data.answer}</p>
+    </details>
+  ))}
 </div>

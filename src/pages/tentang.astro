@@ -1,7 +1,30 @@
 ---
+import { ArrowRight } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../lib/site';
 ---
-<BaseLayout title="Tentang TSL Kids" description="Tentang Tarbiyah Sunnah Learning Kids, program pembelajaran Al-Qur'an dan ilmu diniyyah untuk anak.">
-  <section class="page-hero"><div class="container"><p class="eyebrow">Tentang TSL Kids</p><h1>Belajar sesuai usia. Dibimbing dengan baik. Bertumbuh bersama Al-Qur'an.</h1><p class="lede">TSL Kids adalah program pembelajaran Al-Qur'an dan ilmu diniyyah untuk anak yang dilakukan secara online dengan pendampingan terarah, lembut, bertahap, dan sesuai usia.</p></div></section>
-  <section class="section section--warm"><div class="container content-grid"><article class="content-panel"><h2>Yang kami jaga</h2><p>Program ini membantu orang tua memahami pilihan belajar anak, membangun rasa percaya pada proses, dan memulai langkah pendaftaran tanpa tekanan berlebihan.</p></article><article class="content-panel"><h2>Yang kami hindari</h2><p>Kami tidak mengejar janji hasil instan. Perjalanan belajar anak dibangun melalui kebiasaan kecil, komunikasi, dan pendampingan yang berkesinambungan.</p></article></div></section>
+<BaseLayout title="Tentang TSL Kids" description="Kenali Tarbiyah Sunnah Learning Kids dan pilihan belajar Al-Qur’an untuk anak.">
+  <section class="page-hero">
+    <div class="container wrap">
+      <h1>Tentang TSL Kids</h1>
+      <p class="lede">Tarbiyah Sunnah Learning Kids mendampingi anak belajar Al-Qur’an secara online melalui kelas madrasah, bacaan, dan hafalan.</p>
+    </div>
+  </section>
+  <section class="section section--compact">
+    <div class="container wrap content-grid">
+      <div>
+        <h2>Belajar sesuai usia</h2>
+        <p>Di kelas madrasah, Ananda belajar bersama teman dan mendapat giliran bimbingan individual. Kelas fokus memberi ruang untuk berlatih bacaan atau hafalan sesuai kemampuan.</p>
+        <a class="text-link" href="/program/">Lihat semua program <ArrowRight size={18} aria-hidden="true" /></a>
+      </div>
+      <aside class="support-panel">
+        <h2>Kontak TSL Kids</h2>
+        <ul class="related-programs">
+          <li><a class="text-link" href={contact.whatsapp}>WhatsApp {contact.whatsappLabel}</a></li>
+          <li><a class="text-link" href={contact.instagram}>Instagram {contact.instagramLabel}</a></li>
+          <li><a class="text-link" href={contact.website}>Website {contact.websiteLabel}</a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
 </BaseLayout>

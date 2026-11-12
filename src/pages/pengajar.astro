@@ -1,9 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
+import { ArrowRight } from '@lucide/astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-const teachers = (await getCollection('teachers')).sort((a, b) => a.data.order - b.data.order);
+import { getPrograms, programUrl } from '../lib/programs';
+import { contact } from '../lib/site';
+
+const [teachers, programs] = await Promise.all([getCollection('teachers'), getPrograms()]);
+teachers.sort((left, right) => left.data.order - right.data.order);
 ---
-<BaseLayout title="Pengajar | TSL Kids" description="Mengenal pendekatan pendampingan pengajar TSL Kids.">
-  <section class="page-hero"><div class="container"><p class="eyebrow">Pengajar</p><h1>Pendampingan yang memperhatikan proses anak</h1><p class="lede">Pengajar TSL Kids mendampingi pembelajaran secara bertahap dan membantu orang tua memahami perjalanan belajar Ananda.</p></div></section>
-  <section class="section section--warm"><div class="container content-grid">{teachers.map((teacher) => <article class="content-panel"><p class="eyebrow">{teacher.data.role}</p><h2>{teacher.data.name}</h2><p>{teacher.data.bio}</p><p><strong>Program:</strong> {teacher.data.programs.join(', ')}</p></article>)}<aside class="content-panel"><h2>Komunikasi yang terbuka</h2><p>Informasi perkembangan dan kebutuhan pendampingan dibicarakan dalam konteks proses belajar anak.</p></aside></div></section>
+<BaseLayout title="Pengajar | TSL Kids" description="Kenali pendampingan guru dan program belajar yang ditangani tim pengajar TSL Kids.">
+  <section class="page-hero">
+    <div class="container wrap">
+      <h1>Pengajar TSL Kids</h1>
+      <p class="lede">Guru membantu Ananda berlatih sesuai kemampuan dan memberi koreksi pada bacaan atau hafalan.</p>
+    </div>
+  </section>
+
+  <section class="section section--compact">
+    <div class="container wrap content-grid">
+      <div class="teacher-list">
+        {teachers.map(({ data }) => (
+          <article>
+            <h2>{data.name}</h2>
+            <p class="section-label">{data.role}</p>
+            <p>{data.bio}</p>
+            <ul class="related-programs">
+              {programs.filter((program) => data.programs.includes(program.data.slug)).map((program) => (
+                <li><a class="text-link" href={programUrl(program.data)}>{program.data.title} <ArrowRight size={16} aria-hidden="true" /></a></li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+      <aside class="support-panel">
+        <h2>Komunikasi dengan orang tua</h2>
+        <p>Diskusikan latihan yang sedang dijalani Ananda dan cara melanjutkannya di rumah.</p>
+        <a class="text-link" href={contact.whatsapp}>Hubungi admin <ArrowRight size={18} aria-hidden="true" /></a>
+      </aside>
+    </div>
+  </section>
 </BaseLayout>

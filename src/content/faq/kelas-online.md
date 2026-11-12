@@ -1,6 +1,6 @@
 ---
 question: Apakah semua program dilakukan secara online?
-answer: Ya. Ketiga program dirancang untuk pembelajaran online dengan pendampingan yang menyesuaikan bentuk kelas dan usia anak.
+answer: Ya. Madrasah Anak Usia Dini dan Madrasah Usia Dasar belajar lewat Google Meet. Belajar Al-Qur’an dan Tahfidz Al-Qur’an adalah program online dengan waktu yang fleksibel.
 category: umum
 order: 1
 ---
